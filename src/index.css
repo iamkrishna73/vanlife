@@ -45,6 +45,21 @@ header a:hover {
   color: #161616;
   text-decoration: underline;
 }
+main {
+  margin-bottom: 84px;
+}
+
+footer {
+  background-color: #161616;
+  color: #aaaaaa;
+  height: 74px;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  font-weight: 500;
+}
 
 .link-button {
   display: inline-block;
@@ -109,12 +124,14 @@ header a:hover {
 /*** ABOUT PAGE ***/
 .about-hero-image {
   max-width: 100%;
+  margin-left: 75px;
 }
 
 .about-page-content {
   padding-inline: 23px;
   color: #161616;
   margin-bottom: 55px;
+  margin-left: 75px;
 }
 
 .about-page-content h1 {
@@ -227,4 +244,70 @@ header a:hover {
 
 i[class*="van-type-"] {
   padding: 7px 14px;
+}
+
+.van-detail-container {
+  padding: 27px;
+}
+
+.van-detail-container .back-button {
+  color: black;
+  text-decoration: none;
+}
+
+.van-detail-container .back-button span {
+  text-decoration: underline;
+}
+
+.van-detail {
+  display: flex;
+  flex-direction: column;
+  color: #161616;
+}
+
+.van-detail img {
+  border-radius: 5px;
+  margin-block: 47px;
+}
+
+.van-detail h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.van-detail > i {
+  align-self: flex-start;
+}
+
+.van-detail .van-price {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.van-detail .van-price span {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.van-detail .link-button {
+  background-color: #ff8c38;
+  color: white;
+  font-size: 1.125rem;
+}
+
+.host-nav {
+  display: flex;
+}
+
+.host-nav a {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-weight: 500;
+  padding: 5px 20px;
+}
+
+.host-nav a:hover {
+  color: #161616;
+  text-decoration: underline;
+  font-weight: 600;
 }
