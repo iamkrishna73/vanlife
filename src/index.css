@@ -10,6 +10,11 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+a {
+  text-decoration: unset;
+  color: unset;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
@@ -17,6 +22,12 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -34,12 +45,6 @@ header .site-logo {
   font-size: 25px;
 }
 
-a.active-link {
-  font-weight: bold;
-  text-decoration: underline;
-  color: #161616;
-}
-
 header a {
   text-decoration: none;
   color: #4d4d4d;
@@ -51,6 +56,7 @@ header a:hover {
   color: #161616;
   text-decoration: underline;
 }
+
 main {
   margin-bottom: 84px;
 }
@@ -185,6 +191,15 @@ footer {
   padding-inline: 23px;
 }
 
+.van-list-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.van-list-filter-buttons > a {
+  margin-right: 15px;
+}
+
 .van-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -221,7 +236,7 @@ footer {
 }
 
 .van-type:hover {
-  color: #090909;
+  color: #ffead0;
 }
 
 .van-type:focus {
@@ -248,16 +263,20 @@ footer {
 }
 
 .van-type.clear-filters {
-  margin-left: -20px;
+  margin-left: 5px;
   height: 34px;
   padding: 6px 26px;
   font-style: normal;
   font-weight: 500;
   border: none;
   border-radius: 5px;
-  text-decoration: underline;
   background-color: transparent;
   color: #4d4d4d;
+}
+
+.van-type.clear-filters:hover,
+.van-type.clear-filters.selected {
+  background-color: #bdbdbd;
 }
 
 i[class*="van-type-"] {
@@ -271,6 +290,9 @@ i[class*="van-type-"] {
 .van-detail-container .back-button {
   color: black;
   text-decoration: none;
+}
+
+.van-detail-container .back-button:visited {
 }
 
 .van-detail-container .back-button span {
@@ -326,6 +348,7 @@ i[class*="van-type-"] {
 
 .host-nav a:hover {
   color: #161616;
+  text-decoration: underline;
   font-weight: 600;
 }
 
@@ -422,7 +445,6 @@ i[class*="van-type-"] {
   font-weight: 700;
 }
 
-
 .host-van-detail-info > h4 {
   font-weight: 700;
   font-size: 14px;
@@ -439,7 +461,7 @@ i[class*="van-type-"] {
 
 .host-van-price > span {
   font-size: 16px;
-  color: #4D4D4D;
+  color: #4d4d4d;
 }
 
 .host-van-detail-image {

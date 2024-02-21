@@ -12,14 +12,16 @@ const Vans = () => {
   }, []);
 
   const typeFilter = searchParams.get("type");
-   
-  const displayVan = typeFilter ? vans.filter(van => van.type.toLowerCase() === typeFilter): vans;
-  
+
+  const displayVan = typeFilter
+    ? vans.filter((van) => van.type.toLowerCase() === typeFilter)
+    : vans;
+
   const vanElements = displayVan.map((van) => (
-    <Link to={`/vans/${van.id}`} key={van.id} className='host-van-link-wrapper'>
-      <div key={van.id} className='van-tile'>
+    <Link to={`/vans/${van.id}`} key={van.id} className="host-van-link-wrapper">
+      <div key={van.id} className="van-tile">
         <img alt={van.name} src={van.imageUrl} />
-        <div className='van-info'>
+        <div className="van-info">
           <h3>{van.name}</h3>
           <p>
             ${van.price}
@@ -32,9 +34,23 @@ const Vans = () => {
   ));
 
   return (
-    <div className='van-list-container'>
+    <div className="van-list-container">
       <h1>Explore our van options</h1>
-      <div className='van-list'>{vanElements}</div>
+      <div className="van-list-filter-buttons">
+        <Link to="?type=simple" className="van-type simple">
+          Simple
+        </Link>
+        <Link to="?type=rugged" className="van-type rugged">
+          Rugged
+        </Link>
+        <Link to="?type=luxury" className="van-type luxury">
+          Luxury
+        </Link>
+        <Link to="." className="van-type clear-filters">
+          Clear filter
+        </Link>
+      </div>
+      <div className="van-list">{vanElements}</div>
     </div>
   );
 };
