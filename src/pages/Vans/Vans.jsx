@@ -1,42 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
 
-export function loader() {
-  return getVans()
-}
+export const loader = () => {
+  return getVans();
+};
 
 const Vans = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  //const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const vans = useLoaderData();
-  //console.log(vans);
 
   const typeFilter = searchParams.get("type");
 
-  const displayVan = typeFilter
-    ? vans.filter((van) => van.type.toLowerCase() === typeFilter)
+  const displayedVans = typeFilter
+    ? vans.filter((van) => van.type === typeFilter)
     : vans;
 
-  const handleFilterChange = (key, value) => {
-    setSearchParams((prevParams) => {
-      if (value === null) {
-        prevParams.delete(key);
-      } else {
-        prevParams.set(key, value);
-      }
-      return prevParams;
-    });
-  };
-
-  const vanElements = displayVan.map((van) => (
-    <Link
-      to={van.id}
-      state={{ search: `?${searchParams.toString()}` }}
-      key={van.id}
-      className="host-van-link-wrapper"
-    >
-      <div key={van.id} className="van-tile">
+  const vanElements = displayedVans.map((van) => (
+    <div key={van.id} className="van-tile">
+      <Link
+        to={van.id}
+        state={{
+          search: `?${searchParams.toString()}`,
+          type: typeFilter,
+        }}
+      >
         <img alt={van.name} src={van.imageUrl} />
         <div className="van-info">
           <h3>{van.name}</h3>
@@ -46,9 +35,67 @@ const Vans = () => {
           </p>
         </div>
         <i className={`van-type ${van.type} selected`}>{van.type}</i>
-      </div>
-    </Link>
+      </Link>
+    </div>
   ));
+
+  function handleFilterChange(key, value) {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  }
+
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>;
+  }
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const [error, setError] = useState(null);
+  // const vans = useLoaderData();
+  // console.log(vans)
+
+  // const typeFilter = searchParams.get("type");
+
+  // const displayVan = typeFilter
+  //   ? vans.filter((van) => van.type.toLowerCase() === typeFilter)
+  //   : vans;
+
+  // const handleFilterChange = (key, value) => {
+  //   setSearchParams((prevParams) => {
+  //     if (value === null) {
+  //       prevParams.delete(key);
+  //     } else {
+  //       prevParams.set(key, value);
+  //     }
+  //     return prevParams;
+  //   });
+  // };
+
+  // const vanElements = displayVan.map((van) => (
+  //   <Link
+  //     to={van.id}
+  //     state={{ search: `?${searchParams.toString()}` }}
+  //     key={van.id}
+  //     className="host-van-link-wrapper"
+  //   >
+  //     <div key={van.id} className="van-tile">
+  //       <img alt={van.name} src={van.imageUrl} />
+  //       <div className="van-info">
+  //         <h3>{van.name}</h3>
+  //         <p>
+  //           ${van.price}
+  //           <span>/day</span>
+  //         </p>
+  //       </div>
+  //       <i className={`van-type ${van.type} selected`}>{van.type}</i>
+  //     </div>
+  //   </Link>
+  // ));
 
   // if (error) {
   //   return <h1>There was an error: {error.message}</h1>;
