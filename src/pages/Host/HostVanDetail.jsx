@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, Outlet, NavLink } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  Outlet,
+  NavLink,
+  useLoaderData,
+} from "react-router-dom";
+import { getHostVans } from "../../api";
+import { requireAuth } from "../../utils/utils";
 
+export const loader = async ({ params }) => {
+  await requireAuth();
+  return getHostVans(params.id);
+};
 const HostVanDetail = () => {
-  const { id } = useParams();
-  const [currentVan, setCurrentVan] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/host/vans/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCurrentVan(data.vans));
-  }, []);
+  const currentVan = useLoaderData();
 
   if (!currentVan) {
     return <h1>Loading...</h1>;
@@ -49,13 +54,13 @@ const HostVanDetail = () => {
             to="pricing"
             style={({ isActive }) => (isActive ? activeStyles : null)}
           >
-            Pricing
+            Photos
           </NavLink>
           <NavLink
             to="photos"
             style={({ isActive }) => (isActive ? activeStyles : null)}
           >
-            Photos
+            Pricing
           </NavLink>
         </nav>
         <Outlet context={{ currentVan }} />
