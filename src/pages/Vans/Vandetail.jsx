@@ -15,7 +15,7 @@ const VanDetail = () => {
 
   return (
     <div className="van-detail-container">
-      <Link to={`..${search}`} relative="path" end className="back-button">
+      <Link to={`...${search}`} relative="path" end className="back-button">
         &larr; <span>Back to all vans</span>
       </Link>
       
